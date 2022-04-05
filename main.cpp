@@ -90,8 +90,8 @@ void ConvertTime(std::pair<int, int> &InTime, char &am_pm) {
 
 /**
  * Outputs the provided time.
- * @param InTime
- * @param am_pm
+ * @param InTime Provided time in a pair format of hour and minutes.
+ * @param am_pm Provided char of AM or PM value.
  */
 void Output(std::pair<int, int> &InTime, char &am_pm) {
     std::cout << std::fixed;
