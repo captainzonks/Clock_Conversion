@@ -21,11 +21,23 @@ void ConvertTime(std::pair<int, int> &, char &);
 void Output(std::pair<int, int> &, char &);
 
 int main() {
+    char repeat_char{'y'};
     char am_pm{'a'};
 
-    std::pair<int, int> time{GetTime()};
-    ConvertTime(time, am_pm);
-    Output(time, am_pm);
+    while (true) {
+        std::pair<int, int> time{GetTime()};
+        ConvertTime(time, am_pm);
+        Output(time, am_pm);
+
+        std::cout << "\nWould you like to repeat this program? [y,n] ";
+        std::cin >> repeat_char;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        if (std::tolower(repeat_char) == 'n')
+            break;
+        else
+            continue;
+    }
 
     return 0;
 }
@@ -66,9 +78,11 @@ std::pair<int, int> GetTime() {
  */
 void ConvertTime(std::pair<int, int> &InTime, char &am_pm) {
     int hour{InTime.first};
-    if (hour >= 12) {
+    if (hour > 12) {
         am_pm = 'p';
         InTime.first -= 12;
+    } else if (hour == 12) {
+        am_pm = 'p';
     } else {
         am_pm = 'a';
     }
@@ -80,6 +94,7 @@ void ConvertTime(std::pair<int, int> &InTime, char &am_pm) {
  * @param am_pm
  */
 void Output(std::pair<int, int> &InTime, char &am_pm) {
+    std::cout << std::fixed;
     std::cout << "Your converted time is " << InTime.first << ":" << InTime.second << am_pm
               << std::endl;
 }
